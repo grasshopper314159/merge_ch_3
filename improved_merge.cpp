@@ -1,5 +1,5 @@
 //
-// Created by jay on 9/8/21.
+// Created Nate J on 9/8/21.
 //
 
 #include "improved_merge.h"
@@ -18,7 +18,7 @@ void selection_sort(unsigned long *source, unsigned long n) {
         std::swap(source[i], source[min_ind]);
     }
 }
-// Do i need n?  Check vids
+
 void merge_sort(unsigned long *source, const unsigned long n, unsigned long *buffer, long k) {
     if (n < k) {
         selection_sort(source, n);
@@ -61,29 +61,12 @@ double average(double * times, long n) {
     return sum/n;
 }
 
-//int main(int argc, char **argv) {
-//    if (argc == 2) {
-//        const unsigned long N = atoi(argv[1]);
-//        unsigned long *x = new unsigned long[N];
-//        unsigned long *buffer = new unsigned long[N];
-//        srand (time(NULL));
-//        for (unsigned long i = 0; i < N; ++i)
-//            x[i] = rand() % 10000;
-//        Clock c;
-//        merge_sort(x, N, buffer);
-//        c.ptock();
-//        for (unsigned long i = 0; i < N; ++i)
-//            std::cout << x[i] << " " << std::endl;
-//        delete[] buffer;
-//    } else
-//        std::cerr << "Usage: sort <n>" << std::endl;
-//    return 0;
-//}
 int main(int argc, char **argv) {
     if (argc == 2) {
         const unsigned long N = atoi(argv[1]);
         unsigned long *x = new unsigned long[N];
         unsigned long *buffer = new unsigned long[N];
+        srand (time(NULL));
         double times[60];
         double k_times[200];
         for (long i3 = 1; i3<200; ++i3) {
