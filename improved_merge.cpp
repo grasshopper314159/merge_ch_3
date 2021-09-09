@@ -60,22 +60,19 @@ void merge_sort(unsigned long *source, const unsigned long n, unsigned long *buf
 }
 
 int partition(unsigned long *source, unsigned long lo, unsigned long hi ) {
-    unsigned long i = lo+1;
-    if (i >= hi) return -99;
-    unsigned long j = hi - 1;
-    unsigned long peak_i = *(source+i);
-    unsigned long peak_j = *(source+j);
+    unsigned long i = lo;
+    unsigned long j = hi + 1;
+    unsigned long peak_i = *(source+lo);
+    unsigned long peak_j = *(source+hi);
     unsigned long v = source[lo];
     while(true) {
-        while(*(source+i) < v) {
-            i++;
+        while(source[++i] < v) {
             peak_i = *(source+i);
             // added a minus one
             //i >= ? ??
-            if (i == hi-1) break;
+            if (i == hi) break;
         }
-        while( v < *(source+j)) {
-            j--;
+        while( v < source[--j]) {
             peak_j = *(source+j);
             if (j == lo) break;
         }
@@ -90,7 +87,7 @@ int partition(unsigned long *source, unsigned long lo, unsigned long hi ) {
 //        std::cout << std::endl;
 //        std::cout << v << " " << *(source+i) << " " << *(source+j) << " " << std::endl;
 
-    show(source, 10);
+//    show(source, 10);
     return j;
 }
 
@@ -102,8 +99,8 @@ void quick_sort(unsigned long *source, const unsigned long lo, unsigned long hi)
 // zero length array
     if (hi < lo) return;
     unsigned long j = partition(source, lo, hi);
-//    quick_sort(source, lo, j - 1);
-    quick_sort(source, lo, j);
+    quick_sort(source, lo, j - 1);
+//    quick_sort(source, lo, j);
     show(source, 10);
     quick_sort(source, j + 1, hi);
 //    return 0;
@@ -124,9 +121,9 @@ int main(int argc, char **argv) {
 //
 //        c.ptock();
         show(x, 10);
-        //unsigned long v = partition(x, 0, N);
-        // Uses n-1 in book
-        quick_sort(x,0,N);
+    //    unsigned long v = partition(x, 0, N);
+        // Uses n-1 in book  ??
+        quick_sort(x,0,N-1);
         show(x, 10);
         delete[] buffer;
     } else
