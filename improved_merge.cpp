@@ -87,54 +87,41 @@ int partition(long *source, long lo, long hi ) {
         std::swap(source[i], source[j]);
       }
     std::swap(source[lo], source[j]);
-
-//        for (long k = lo; k < hi+1; ++k) {
-//            std::cout << source[k] << " \t";
-//        }
-//        std::cout << std::endl;
-//        std::cout << v << " " << *(source+i) << " " << *(source+j) << " " << std::endl;
-
-//    show(source, 10);
     return j;
 }
 
 void quick_sort(long *source, const long lo, long hi) {
-//    if (n <= 32) {
-//        selection_sort(source, n);
-//        return;
-//    }
 // zero length array
     if (hi < lo) return;
     unsigned long j = partition(source, lo, hi);
     quick_sort(source, lo, j - 1);
-//    quick_sort(source, lo, j);
-//    show(source, 10);
     quick_sort(source, j + 1, hi);
 }
-
+double average(double * times, long n) {
+    double sum=0.0;
+    for (long i = 0; i<n; ++i) {
+        sum+=times[i];
+    }
+    return sum/n;
+}
 int main(int argc, char **argv) {
     if (argc == 2) {
         const unsigned long N = atoi(argv[1]);
         long *x = new long[N];
 //        long x[10] = {60,10,20,70,90,50,40,80,30,100};
-
         long *buffer = new long[N];
+        double times[60];
         srand (time(NULL));
-        for (long i = 0; i < N; ++i)
-            x[i] = rand() % 10000;
-//        Clock c;
-//        merge_sort(x, N, buffer);
-//
-//        c.ptock();
-        show(x, 10);
-        std::cout<< isSorted(x,0,N) << std::endl << std::endl;
-    //    long v = partition(x, 0, N);
-        // Uses n-1 in book  ??
-        quick_sort(x,0,N-1);
-        show(x, 10);
-        std::cout<< isSorted(x,0,N) << std::endl << std::endl;
-        //Comment out assert for timing
+
+            for (long i2 = 0; i2 < 60; ++i2) {
+                for (unsigned long i = 0; i < N; ++i)
+                    x[i] = rand() % 10000;
+                Clock c;
+                quick_sort(x,0,N-1);
+                times[i2] = c.tock();
+            }
         assert(isSorted(x,0,N));
+        std::cout << average(times,60) << std::endl;
         delete[] buffer;
     } else
         std::cerr << "Usage: sort <n>" << std::endl;
