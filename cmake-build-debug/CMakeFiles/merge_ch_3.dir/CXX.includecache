@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jay/CLionProjects/merge_ch_3/Clock.h
+iostream
+-
+iomanip
+-
+chrono
+-
+
+/home/jay/CLionProjects/merge_ch_3/improved_merge.cpp
+improved_merge.h
+/home/jay/CLionProjects/merge_ch_3/improved_merge.h
+iostream
+-
+Clock.h
+/home/jay/CLionProjects/merge_ch_3/Clock.h
+
+/home/jay/CLionProjects/merge_ch_3/improved_merge.h
+
