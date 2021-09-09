@@ -4,6 +4,7 @@
 
 #include "improved_merge.h"
 #include <iostream>
+#include <assert.h>
 #include "Clock.h"
 
 void show(long *x, long N) {
@@ -11,6 +12,12 @@ void show(long *x, long N) {
         std::cout << x[i] << " " << std::endl;
 }
 
+
+int isSorted(long *a, long lo, long hi) {
+    for (long i = lo + 1; i < hi; i++)
+        if (a[i] < a[i-1]) return 0;
+    return 1;
+}
 
 void selection_sort(long *source, long n) {
     for (long i = 0; i < n; ++i) {
@@ -101,30 +108,33 @@ void quick_sort(long *source, const long lo, long hi) {
     unsigned long j = partition(source, lo, hi);
     quick_sort(source, lo, j - 1);
 //    quick_sort(source, lo, j);
-    show(source, 10);
+//    show(source, 10);
     quick_sort(source, j + 1, hi);
-//    return 0;
 }
 
 int main(int argc, char **argv) {
     if (argc == 2) {
         const unsigned long N = atoi(argv[1]);
-//        long *x = new long[N];
-        long x[10] = {60,10,20,70,90,50,40,80,30,100};
+        long *x = new long[N];
+//        long x[10] = {60,10,20,70,90,50,40,80,30,100};
 
         long *buffer = new long[N];
         srand (time(NULL));
-//        for (long i = 0; i < N; ++i)
-//            x[i] = rand() % 10000;
+        for (long i = 0; i < N; ++i)
+            x[i] = rand() % 10000;
 //        Clock c;
 //        merge_sort(x, N, buffer);
 //
 //        c.ptock();
         show(x, 10);
+        std::cout<< isSorted(x,0,N) << std::endl << std::endl;
     //    long v = partition(x, 0, N);
         // Uses n-1 in book  ??
         quick_sort(x,0,N-1);
         show(x, 10);
+        std::cout<< isSorted(x,0,N) << std::endl << std::endl;
+        //Comment out assert for timing
+        assert(isSorted(x,0,N));
         delete[] buffer;
     } else
         std::cerr << "Usage: sort <n>" << std::endl;

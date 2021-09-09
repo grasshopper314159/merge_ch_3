@@ -19,6 +19,8 @@ improved_merge.h
 /home/jay/CLionProjects/merge_ch_3/improved_merge.h
 iostream
 -
+assert.h
+-
 Clock.h
 /home/jay/CLionProjects/merge_ch_3/Clock.h
 
