@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/jay/CLionProjects/merge_ch_3/.
 
-CXX_FLAGS = -g -std=gnu++14
+CXX_FLAGS =  -O3 -g -std=gnu++11
 
