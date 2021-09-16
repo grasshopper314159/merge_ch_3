@@ -6,8 +6,8 @@
 #include <iostream>
 #include <assert.h>
 #include "Clock.h"
-
-void show(long *x, long N) {
+template<typename T>
+void show(T *x, long N) {
     for (long i = 0; i < N; ++i)
         std::cout << x[i] << " " << std::endl;
 }
@@ -65,13 +65,13 @@ void merge_sort(long *source, const long n, long *buffer) {
         source[i] = buffer[i];
 
 }
-
-int partition(long *source, long lo, long hi ) {
+template<typename T>
+int partition(T *source, long lo, long hi ) {
     long i = lo;
     long j = hi + 1;
-    long peak_i = *(source+lo);
-    long peak_j = *(source+hi);
-    long v = source[lo];
+    T peak_i = *(source+lo);
+    T peak_j = *(source+hi);
+    T v = source[lo];
     while(true) {
         while(source[++i] < v) {
             peak_i = *(source+i);
@@ -89,15 +89,15 @@ int partition(long *source, long lo, long hi ) {
     std::swap(source[lo], source[j]);
     return j;
 }
-
-void quick_sort(long *source, const long lo, long hi) {
+template<typename T>
+void quick_sort(T *source, const long lo, long hi) {
 // zero length array
     if (hi < lo) return;
     unsigned long j = partition(source, lo, hi);
     quick_sort(source, lo, j - 1);
     quick_sort(source, j + 1, hi);
 }
-double average(double * times, long n) {
+double average_run_times(double * times, long n) {
     double sum=0.0;
     for (long i = 0; i<n; ++i) {
         sum+=times[i];
@@ -121,7 +121,8 @@ int main(int argc, char **argv) {
                 times[i2] = c.tock();
             }
         assert(isSorted(x,0,N));
-        std::cout << average(times,60) << std::endl;
+        std::cout << average_run_times(times, 60) << std::endl;
+
         delete[] buffer;
     } else
         std::cerr << "Usage: sort <n>" << std::endl;
